@@ -1,0 +1,16 @@
+html, body {
+    height: 100%;
+}
+
+body {
+    display: flex;
+    align-items: center;
+}
+
+.alert {
+    margin-top: 1em;
+}
+
+#facultyInfo {
+    display: none;
+}

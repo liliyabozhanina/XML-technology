@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!ELEMENT contacts (contact*)>
+    <!ELEMENT contact (name, photo?, email*, phone*, (label | labels)?)>
+
+        <!ELEMENT name ((given, last?) | (given?, last))>
+            <!ELEMENT given (#PCDATA)>
+            <!ELEMENT last (#PCDATA)>
+
+        <!ELEMENT photo EMPTY>
+            <!ATTLIST photo uri CDATA #REQUIRED>
+
+        <!ELEMENT email (#PCDATA)>
+            <!ATTLIST email type (personal | business) #IMPLIED>
+
+        <!ELEMENT phone (#PCDATA)>
+            <!ATTLIST phone type (personal | business | mobile) "personal">
+
+<!--
+        С използване на ENTITY могат да се избегнат повторения
+        (подобно на макросите в C++)
+
+        <!ENTITY % contact.type.att "personal | business">
+
+        <!ELEMENT email (#PCDATA)>
+        <!ATTLIST email type (%contact.type.att;) #IMPLIED>
+
+        <!ELEMENT phone (#PCDATA)>
+        <!ATTLIST phone type (%contact.type.att; | mobile) "personal">
+-->
+
+        <!ELEMENT labels (label+)>
+            <!ELEMENT label (#PCDATA)>

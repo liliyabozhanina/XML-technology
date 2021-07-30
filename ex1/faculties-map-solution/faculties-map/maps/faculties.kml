@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kml>
+    <!-- Карта на факултетите на СУ -->
+    <Folder>
+        <name>Факултети</name>
+
+        <!--
+            Стопански факултет
+        -->
+        <Placemark>
+            <name>Стопански факултет</name>
+            <address>София 1113, бул. Цариградско шосе 125</address>
+            <Point>
+                <coordinates>23.363992, 42.672976</coordinates>
+            </Point>
+        </Placemark>
+
+        <!--
+            Исторически факултет
+        -->
+        <Placemark>
+            <name>Исторически факултет</name>
+            <address>София 1504, бул. Цар Освободител 15</address>
+            <Point>
+                <coordinates>23.335206, 42.693023</coordinates>
+            </Point>
+        </Placemark>
+
+        <!--
+            Факултет по математика и информатика
+        -->
+        <Placemark>
+            <name>Факултет по математика и информатика</name>
+            <address>София 1164, бул. Джеймс Баучър 5</address>
+            <Point>
+                <coordinates>23.330584, 42.674396</coordinates>
+            </Point>
+        </Placemark>
+    </Folder>
+</kml>
