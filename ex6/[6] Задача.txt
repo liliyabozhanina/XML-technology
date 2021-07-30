@@ -1,0 +1,21 @@
+Задача за упражнение (XML -> Plain Text)
+
+Изтеглете архива и отворете директорията в IntelliJ Idea. Напишете XSL трансформация, която да запише името, адреса и координатите на всички маркери (Placemark) от даден KML документ в CSV файл.
+
+Примерен KML документ:
+
+<?xml version="1.0" encoding="UTF-8"?>
+<kml xmlns="http://www.opengis.net/kml/2.2">
+    <Placemark>
+        <name>Име</name>
+        <address>Адрес</address>
+        <Point>
+            <coordinates>23.363992, 42.672976</coordinates>
+        </Point>
+    </Placemark>
+</kml>
+
+Примерен CSV файл:
+
+Name,Address,Coordinates
+Име,Адрес,"23.363992, 42.672976"

@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsl:stylesheet version="2.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
+    xmlns:kml="http://www.opengis.net/kml/2.2"
+    xmlns:fn="http://xmlcourse.free.bg/2019/xslt/functions">
+
+    <xsl:output method="text" encoding="UTF-8" />
+
+    <xsl:template match="/">
+        <!--
+            Използването на `xsl:text` позволява по-голям контрол върху
+            символите за празно пространство (whitespace characters) в изхода
+        -->
+        <xsl:text>Name,Address,Coordinates</xsl:text> <!-- Заглавният ред на CSV файла -->
+        <xsl:text>&#10;</xsl:text> <!-- Знак за нов ред -->
+
+        <!--
+            В случая не се интересуваме къде в дървото се намира `Placemark`,
+            дори напротив - изрично искаме да вземем под внимания всички срещания, независимо къде се намират.
+            Затова използваме `//`. Имайте предвид обаче, че в много случай, макар и лесно за ползване,
+            `//` не е това, което ви трябва!
+        -->
+        <xsl:apply-templates select="//kml:Placemark" />
+    </xsl:template>
+
+    <xsl:template match="kml:Placemark">
+        <!-- Името, адресът и координатите на обекта, разделени със запетая -->
+        <xsl:value-of select="string-join((fn:quote(kml:name), fn:quote(kml:address), fn:quote(kml:Point/kml:coordinates)), ',')" />
+
+        <xsl:text>&#10;</xsl:text> <!-- Знак за нов ред -->
+    </xsl:template>
+
+    <!--
+        Функция, която огражда даден символен низ с кавички.
+        В CSV Файловете всички полета, съдържащи запетайка, кавичка или нов ред, трябва да се заградят с кавички.
+        Затова използваме тази функция за всички стойности, които са получени от KML файла.
+        Дори да не съдържат някой от тези символи, заграждането с кавички няма да навреди.
+    -->
+    <xsl:function name="fn:quote"> <!-- Задължително е функциите да са в namespace -->
+        <xsl:param name="string_to_quote" />
+
+        <!--
+            Ако символният низ съдържа кавички, то всяка от тях трябва да се замени с две кавички.
+            Например
+                примерен символен низ с "кавички"
+            трябва да стане
+                примерен символен низ с ""кавички""
+        -->
+        <xsl:variable name="escaped_string">
+            <xsl:value-of select="replace($string_to_quote, '&quot;', '&quot;&quot;')" />
+        </xsl:variable>
+
+        <xsl:value-of select="concat('&quot;', $escaped_string ,'&quot;')" />
+    </xsl:function>
+
+</xsl:stylesheet>
